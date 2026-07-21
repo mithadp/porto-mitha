@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Map semantic CSS variables into Tailwind theme colors.
+   The variables are redefined under .dark below, and because var() resolves
+   lazily at use-time, utilities like `bg-paper` / `text-ink` switch automatically. */
+@theme {
+  --font-sans: var(--font-inter), system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-strong: var(--accent-strong);
+  --color-btn: var(--btn);
+  --color-btn-ink: var(--btn-ink);
+}
+
+:root {
+  --paper: #f4f1e8;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --ink-soft: #57534e;
+  --ink-faint: #a8a29e;
+  --line: rgba(28, 25, 23, 0.09);
+  --line-strong: rgba(28, 25, 23, 0.18);
+  --accent: #b8442a;
+  --accent-soft: rgba(184, 68, 42, 0.1);
+  --accent-strong: #9c3821;
+  --btn: #161513;
+  --btn-ink: #f4f1e8;
+  --grid: rgba(28, 25, 23, 0.045);
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #15161b;
+  --surface: #1e1f27;
+  --ink: #f5f3ee;
+  --ink-soft: #a8a29e;
+  --ink-faint: #6b6862;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --accent: #e08060;
+  --accent-soft: rgba(224, 128, 96, 0.14);
+  --accent-strong: #eb9075;
+  --btn: #f5f3ee;
+  --btn-ink: #15161b;
+  --grid: rgba(255, 255, 255, 0.035);
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headings: serif, tight tracking, optical sizing for character */
+.font-serif {
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+
+h1.font-serif {
+  letter-spacing: -0.035em;
+}
+
+/* Grid-paper background applied to the whole page */
+.grid-paper {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Smooth page enter animation */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: page-enter 0.35s ease-out forwards;
+}
+
+/* Refined link transitions */
+a, button {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
