@@ -9,7 +9,7 @@ export async function GET() {
     return new NextResponse(fileBuffer, {
       headers: {
         "Content-Type": "image/jpeg",
-        "Cache-Control": "public, max-age=86400",
+        "Cache-Control": "public, max-age=0, must-revalidate",
       },
     });
   } catch {
@@ -19,7 +19,7 @@ export async function GET() {
       return new NextResponse(fallbackBuffer, {
         headers: {
           "Content-Type": "image/jpeg",
-          "Cache-Control": "public, max-age=86400",
+          "Cache-Control": "public, max-age=0, must-revalidate",
         },
       });
     } catch {
