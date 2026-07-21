@@ -3,8 +3,7 @@ import path from "path";
 import fs from "fs";
 
 export async function GET() {
-  // Serve DSC09079.JPG from the workspace assets folder outside the portfolio directory
-  const filePath = path.join(process.cwd(), "..", "assets", "profile-photo", "DSC09079.JPG");
+  const filePath = path.join(process.cwd(), "public", "assets", "profile", "DSC09079.JPG");
   try {
     const fileBuffer = fs.readFileSync(filePath);
     return new NextResponse(fileBuffer, {
@@ -14,7 +13,6 @@ export async function GET() {
       },
     });
   } catch {
-    // Fallback to the existing mitha.jpg in public folder
     const fallbackPath = path.join(process.cwd(), "public", "assets", "profile", "mitha.jpg");
     try {
       const fallbackBuffer = fs.readFileSync(fallbackPath);
